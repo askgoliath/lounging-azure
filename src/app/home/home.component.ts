@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
       this.xbridge.Get<Lounger[]>("Loungers")
       .then(
       function(result: Lounger[]){
+          console.info(result);
           this.loungers = result;
       }, 
       function(reason){

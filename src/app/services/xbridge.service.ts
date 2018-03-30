@@ -17,7 +17,12 @@ export class XBridge{
             Type : XMessageType.GET,
             CallbackFunctionName : ''
         };
-        let promise = new Promise<T>((resolve, reject) => {
+        let promise = new Promise<any>((resolve, reject) => {
+            var result = [{ UserName : 'dvdaboh', FirstName : 'David'}] as Lounger[];
+            if(result) {
+                resolve(result);
+                return;
+            }
             this.NativeFunction("XRequest", request, function(response : XResponse<T>){
                 if(response.Success)
                     resolve(response.ResultObject);
@@ -29,6 +34,7 @@ export class XBridge{
     }
     
     private NativeFunction = function (action, data, callback) {
+        if(!window.nativeFuncs2) return;
         var callbackId = window.nativeFuncs2.push(callback) - 1;
         window.Native(action, JSON.stringify(data) + '!' + callbackId);
     };
