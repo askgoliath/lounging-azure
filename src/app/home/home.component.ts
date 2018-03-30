@@ -1,15 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-
+import { XBridge , Lounger } from '../services/xbridge.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'], 
+  providers:[
+    XBridge
+],
 })
 export class HomeComponent implements OnInit {
+  loungers : Lounger[];
+  constructor (private xbridge : XBridge){
+      
+  }
 
-  constructor() { }
+  ngOnInit()
+  {
+      this.getLoungers();
+  }
 
-  ngOnInit() {
+  getLoungers(){
+      this.xbridge.Get<Lounger[]>("Loungers")
+      .then(
+      function(result: Lounger[]){
+          this.loungers = result;
+      }, 
+      function(reason){
+          alert(reason);
+      })
+      .catch(function(reason){
+          alert(reason);
+      })
   }
 
 }
