@@ -18,8 +18,8 @@ export class XBridge{
             CallbackFunctionName : ''
         };
         let promise = new Promise<any>((resolve, reject) => {
-            var result = [{ UserName : 'dvdaboh', FirstName : 'David'}] as Lounger[];
-            if(result) {
+            var result = [{ UserName : 'askgoliath', FirstName : 'David'}] as Lounger[];
+            if(!window.nativeFuncs2) {
                 resolve(result);
                 return;
             }
