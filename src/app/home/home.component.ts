@@ -10,6 +10,7 @@ import { XBridge , Lounger } from '../services/xbridge.service';
 })
 export class HomeComponent implements OnInit {
   loungers : Lounger[];
+ 
   constructor (private xbridge : XBridge){
       
   }
@@ -20,11 +21,12 @@ export class HomeComponent implements OnInit {
   }
 
   getLoungers(){
+      let This = this;
       this.xbridge.Get<Lounger[]>("Loungers")
       .then(
       function(result: Lounger[]){
           console.info(result);
-          this.loungers = result;
+          This.loungers = result;
       }, 
       function(reason){
           alert(reason);
