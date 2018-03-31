@@ -19,6 +19,7 @@ export class XBridge{
         };
         let promise = new Promise<any>((resolve, reject) => {
             var result = [{ UserName : 'askgoliath', FirstName : 'David'}] as Lounger[];
+            alert(JSON.stringify(window.nativeFuncs2));
             if(!window.nativeFuncs2) {
                 resolve(result);
                 return;
